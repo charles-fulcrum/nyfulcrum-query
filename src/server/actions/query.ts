@@ -1,3 +1,3 @@
 export async function query() {
-  return 'do the query';
+  return 'we do the query';
 }

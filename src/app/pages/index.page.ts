@@ -7,7 +7,7 @@ import { ButtonModule } from 'primeng/button';
   selector: 'app-home',
   standalone: true,
   imports: [RouterLink, MainLayoutComponent, ButtonModule],
-  templateUrl: './(home).page.html',
+  templateUrl: './index.page.html',
 })
 export default class HomePageComponent {
   count = 0;

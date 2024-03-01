@@ -3,9 +3,11 @@ import { db } from '../../../database/connection';
 import { users } from '../../../database/models';
 
 export const load = async () => {
-  const result = await db.query.users.findMany({
-    where: isNull(users.deletedAt),
-  });
+  // const result = await db.query.users.findMany({
+  //   where: isNull(users.deletedAt),
+  // });
+
+  const result = { hello: 'world' };
 
   console.debug(result);
 
