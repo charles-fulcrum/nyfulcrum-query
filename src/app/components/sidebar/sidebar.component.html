@@ -1,0 +1,26 @@
+<h1
+  class="grid place-items-center font-semibold text-2xl text-white h-[var(--header-height)] bg-primary"
+>
+  Admin
+</h1>
+<aside class="h-full w-[var(--sidebar-width,256px)] shadow-md z-50">
+  <ul>
+    @for (item of menuItems; track $index) {
+      <a
+        role="link"
+        routerLinkActive="group active"
+        [routerLink]="item.link"
+        [routerLinkActiveOptions]="{ exact: item.link === '/' }"
+      >
+        <li
+          class="p-3 text-[var(--text-color)] group-[.active]:bg-[var(--primary-700)] group-[.active]:text-white"
+        >
+          @if (item.icon) {
+            <i class="text-center w-6 mr-1" [class]="item.icon"></i>
+          }
+          {{ item.label }}
+        </li>
+      </a>
+    }
+  </ul>
+</aside>

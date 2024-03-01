@@ -1,0 +1,7 @@
+:host {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  height: 100%;
+  position: fixed;
+  z-index: 50;
+}
