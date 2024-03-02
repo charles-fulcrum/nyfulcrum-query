@@ -1,0 +1,30 @@
+<p-dialog
+  header="Add New Term"
+  [(visible)]="isShowing"
+  [modal]="true"
+  [style]="{ width: '400px' }"
+  [draggable]="false"
+  [resizable]="false"
+>
+  <form (submit)="save()">
+    <div class="flex flex-col gap-2">
+      <label class="text-sm" for="term">Term Name</label>
+      <input
+        pInputText
+        name="term"
+        id="term"
+        placeholder="Any word/s, keyword/s, phrase..."
+        [(ngModel)]="termName"
+      />
+    </div>
+    <div class="text-center mt-4">
+      <p-button
+        label="Save"
+        icon="fa fa-floppy-disk"
+        severity="success"
+        [loading]="isSaving"
+        (click)="save()"
+      ></p-button>
+    </div>
+  </form>
+</p-dialog>
