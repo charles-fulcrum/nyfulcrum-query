@@ -9,10 +9,10 @@ import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
 import { TableModule } from 'primeng/table';
 import { TermType } from 'src/types';
-import { load } from './admin.server';
+import { load } from './terms.server';
 
 @Component({
-  selector: 'app-admin',
+  selector: 'app-admin-terms',
   standalone: true,
   imports: [
     RouterLink,
@@ -22,16 +22,16 @@ import { load } from './admin.server';
     DialogModule,
     TermFormComponent,
   ],
-  templateUrl: './admin.page.html',
+  templateUrl: './terms.page.html',
 })
-export default class AdminPageComponent {
+export default class AdminTermsPageComponent {
   apiService = inject(ApiService);
 
   @ViewChild('termForm') termFormComponent!: TermFormComponent;
 
   terms = toSignal(injectLoad<typeof load>(), { requireSync: true });
 
-  termToDelete!: TermType;
+  termToDelete!: TermType | undefined;
   isShowingDeleteConfirm = false;
   isDeletingTerm = false;
 
