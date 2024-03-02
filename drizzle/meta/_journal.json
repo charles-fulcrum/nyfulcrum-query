@@ -1,0 +1,20 @@
+{
+  "version": "5",
+  "dialect": "pg",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1709360996460,
+      "tag": "0000_fresh_puppet_master",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1709361829673,
+      "tag": "0001_legal_phantom_reporter",
+      "breakpoints": true
+    }
+  ]
+}
