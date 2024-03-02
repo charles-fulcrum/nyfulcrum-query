@@ -4,31 +4,47 @@ import { ApiService } from '@app/services/api.service';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
 import { InputTextModule } from 'primeng/inputtext';
+import { TermType } from 'src/types';
 
 @Component({
-  selector: 'app-add-term-form',
+  selector: 'app-term-form',
   standalone: true,
   imports: [InputTextModule, FormsModule, ButtonModule, DialogModule],
-  templateUrl: './add-term-form.component.html',
+  templateUrl: './term-form.component.html',
 })
-export class AddTermFormComponent {
+export class TermFormComponent {
   apiService = inject(ApiService);
 
   termName = '';
+  termToEditId!: string | undefined;
+
   isShowing = false;
   isSaving = false;
 
   show() {
     this.isShowing = true;
+    this.termToEditId = undefined;
   }
 
   close() {
     this.isShowing = false;
   }
 
+  showEdit(term: TermType) {
+    this.show();
+    this.termToEditId = term.id;
+    this.termName = term.name;
+  }
+
   protected async save() {
     this.isSaving = true;
-    await this.apiService.createTerm(this.termName);
+
+    if (this.termToEditId) {
+      await this.apiService.editTerm(this.termToEditId, { name: this.termName });
+    } else {
+      await this.apiService.createTerm({ name: this.termName });
+    }
+
     this.isSaving = false;
     this.close();
 

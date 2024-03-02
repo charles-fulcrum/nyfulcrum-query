@@ -1,8 +1,8 @@
 <p-dialog
-  header="Add New Term"
-  [(visible)]="isShowing"
+  [header]="!!termToEditId ? 'Edit Term' : 'Add New Term'"
   [modal]="true"
   [style]="{ width: '400px' }"
+  [(visible)]="isShowing"
   [draggable]="false"
   [resizable]="false"
 >

@@ -4,7 +4,7 @@
     label="Add"
     icon="fa fa-plus"
     severity="success"
-    (click)="add()"
+    (click)="addTerm()"
   ></p-button>
 </nav>
 
@@ -22,24 +22,47 @@
       <td>
         <small class="text-xs"> {{ row.id }} </small>
       </td>
-      <td class="flex gap-2">
+      <td class="flex gap-2 !px-0">
         <p-button
           class="text-xs"
-          label="Edit"
           icon="fa fa-pen"
           severity="secondary"
           size="small"
+          (click)="editTerm(row)"
         ></p-button>
         <p-button
           class="text-xs"
-          label="Delete"
           icon="fa fa-trash"
           severity="danger"
           size="small"
+          (click)="deleteTerm(row)"
         ></p-button>
       </td>
     </tr>
   </ng-template>
 </p-table>
 
-<app-add-term-form #addTermForm></app-add-term-form>
+<app-term-form #termForm></app-term-form>
+
+<p-dialog
+  *ngIf="termToDelete"
+  header="Confirm Delete Term"
+  [modal]="true"
+  [style]="{ width: '300px' }"
+  [(visible)]="isShowingDeleteConfirm"
+  [draggable]="false"
+  [resizable]="false"
+>
+  Are you sure you want to delete the term:
+  <strong>"{{ termToDelete.name }}"</strong>?
+  <div class="text-center mt-5">
+    <p-button
+      class="block text-sm"
+      label="Delete"
+      icon="fa fa-trash"
+      severity="danger"
+      [loading]="isDeletingTerm"
+      (click)="confirmDeleteTerm()"
+    ></p-button>
+  </div>
+</p-dialog>
