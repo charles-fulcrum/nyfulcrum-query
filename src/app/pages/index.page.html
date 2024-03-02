@@ -1,8 +1,16 @@
-<app-main-layout>
-  <h2 class="text-xl">Hello Fulcrum</h2>
-  <br />
-  <p-button [label]="'Count ' + count" (click)="increment()"></p-button>
-  <br />
-  <br />
-  <a routerLink="/about" class="p-button font-bold"> Go to about </a>
-</app-main-layout>
+<main class="flex flex-col items-center justify-center h-full">
+  <div class="flex items-center gap-3">
+    <img src="/fulcrum-logo.svg" alt="logo" width="250" />
+    <h1 class="text-[48px] font-semibold pt-1">Query</h1>
+  </div>
+  <span class="p-input-icon-left mt-12">
+    <i class="fa fa-search fa-lg !left-4 !mt-0"></i>
+    <input
+      pInputText
+      type="text"
+      class="p-inputtext-lg w-[480px] placeholder:text-slate-400 !pl-12"
+      placeholder="What do you want to know about us?"
+    />
+  </span>
+  <p-button class="mt-5" label="Let me know" size="large"></p-button>
+</main>
