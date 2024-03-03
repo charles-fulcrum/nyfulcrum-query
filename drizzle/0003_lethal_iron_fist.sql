@@ -1,0 +1,1 @@
+ALTER TABLE "terms" ALTER COLUMN "score" SET DEFAULT 0;

@@ -7,8 +7,9 @@ export default defineEventHandler(async (event) => {
     return;
   }
 
-  const body = await readBody<{ name: string }>(event);
+  const body = await readBody<{ name: string, updatedScore: number }>(event);
   const termName = body.name;
-  const result = await updateTerm(termId, { name: termName });
+  const termScore = body.updatedScore;
+  const result = await updateTerm(termId, { name: termName, score:termScore });
   return result;
 });

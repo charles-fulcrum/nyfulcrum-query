@@ -15,6 +15,20 @@
       "when": 1709361829673,
       "tag": "0001_legal_phantom_reporter",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1709475373041,
+      "tag": "0002_tricky_strong_guy",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1709475436502,
+      "tag": "0003_lethal_iron_fist",
+      "breakpoints": true
     }
   ]
 }
