@@ -40,9 +40,9 @@ export class TermFormComponent {
     this.isSaving = true;
 
     if (this.termToEditId) {
-      await this.apiService.editTerm(this.termToEditId, { name: this.termName });
+      await this.apiService.editTerm(this.termToEditId, { name: this.termName, score: 0 });
     } else {
-      await this.apiService.createTerm({ name: this.termName });
+      await this.apiService.createTerm({ name: this.termName, score: 0 });
     }
 
     this.isSaving = false;
