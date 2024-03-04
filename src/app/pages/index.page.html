@@ -3,14 +3,31 @@
     <img src="/fulcrum-logo.svg" alt="logo" width="250" />
     <h1 class="text-[48px] font-semibold pt-1">Query</h1>
   </div>
-  <span class="p-input-icon-left mt-12">
-    <i class="fa fa-search fa-lg !left-4 !mt-0"></i>
-    <input
-      pInputText
-      type="text"
-      class="p-inputtext-lg w-[480px] placeholder:text-slate-400 !pl-12"
-      placeholder="What do you want to know about us?"
-    />
-  </span>
-  <p-button class="mt-5" label="Let me know" size="large"></p-button>
+  <form class="flex flex-col items-center" (submit)="query()">
+    <div class="p-input-icon-left block mt-12">
+      <i class="fa fa-search fa-lg !left-4 !mt-0"></i>
+      <input
+        #queryInput
+        pInputText
+        type="text"
+        name="query"
+        class="p-inputtext-lg w-[480px] placeholder:text-slate-400 !pl-12"
+        placeholder="What do you want to know about us?"
+        [(ngModel)]="queryText"
+      />
+    </div>
+    <p-button
+      class="mt-5"
+      label="Let me know"
+      size="large"
+      [loading]="isQuerying"
+      (click)="query()"
+    ></p-button>
+  </form>
+
+  @if (hasMatch) {
+  <h1 class="text-3xl text-green-600 font-bold mt-8">Yup!</h1>
+  } @if(noMatch) {
+  <h1 class="text-3xl text-red-600 font-bold mt-8">Nope</h1>
+  }
 </main>

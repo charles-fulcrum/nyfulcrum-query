@@ -7,49 +7,44 @@ type RequestBody = { [key: string]: unknown } | unknown[];
   providedIn: 'root',
 })
 export class ApiService {
-  protected async post(url: string, body: RequestBody) {
-    const response = await fetch(url, {
-      method: 'POST',
-      headers: {
+  private async request(url: string, method: string, body?: RequestBody) {
+    const requestOptions: RequestInit = { method };
+    if (body) {
+      requestOptions.headers = {
         'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(body),
-    });
+      };
+      requestOptions.body = JSON.stringify(body);
+    }
 
+    const response = await fetch(url, requestOptions);
     const data = await response.json();
     return { response, data };
+  }
+
+  protected async get(url: string) {
+    return this.request(url, 'GET');
+  }
+
+  protected async post(url: string, body: RequestBody) {
+    return this.request(url, 'POST', body);
   }
 
   protected async delete(url: string) {
-    const response = await fetch(url, { method: 'DELETE' });
-    const data = await response.json();
-    return { response, data };
+    return this.request(url, 'DELETE');
   }
 
   protected async patch(url: string, body: RequestBody) {
-    const response = await fetch(url, {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(body),
-    });
-
-    const data = await response.json();
-    return { response, data };
+    return this.request(url, 'PATCH', body);
   }
 
   protected async put(url: string, body: RequestBody) {
-    const response = await fetch(url, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(body),
-    });
+    return this.request(url, 'PUT', body);
+  }
 
-    const data = await response.json();
-    return { response, data };
+  query(query: string) {
+    const queryParams = new URLSearchParams();
+    queryParams.set('query', query);
+    return this.get(`/api/query?${queryParams.toString()}`);
   }
 
   createTerm(term: Omit<TermType, 'id'>) {
