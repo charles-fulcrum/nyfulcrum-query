@@ -15,7 +15,8 @@ import { TermType } from 'src/types';
 export class TermFormComponent {
   apiService = inject(ApiService);
 
-  termName = '';
+  name = '';
+  score = 0;
   termToEditId!: string | undefined;
 
   isShowing = false;
@@ -33,16 +34,18 @@ export class TermFormComponent {
   showEdit(term: TermType) {
     this.show();
     this.termToEditId = term.id;
-    this.termName = term.name;
+    this.name = term.name;
+    this.score = term.score;
   }
 
   protected async save() {
     this.isSaving = true;
 
+    const termData = { name: this.name, score: this.score };
     if (this.termToEditId) {
-      await this.apiService.editTerm(this.termToEditId, { name: this.termName, score: 0 });
+      await this.apiService.editTerm(this.termToEditId, termData);
     } else {
-      await this.apiService.createTerm({ name: this.termName, score: 0 });
+      await this.apiService.createTerm(termData);
     }
 
     this.isSaving = false;

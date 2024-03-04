@@ -53,7 +53,7 @@ export class ApiService {
   }
 
   createTerm(term: Omit<TermType, 'id'>) {
-    return this.post('/api/terms', { name: term.name });
+    return this.post('/api/terms', term);
   }
 
   editTerm(termId: TermType['id'], editedTerm: Omit<TermType, 'id'>) {
