@@ -6,7 +6,7 @@ import { ChipsModule } from 'primeng/chips';
 import { DialogModule } from 'primeng/dialog';
 import { InputTextModule } from 'primeng/inputtext';
 import { MultiSelectModule } from 'primeng/multiselect';
-import { CategoryType, TermType, TermWithCategories } from 'src/types';
+import { CategoryType, TermType } from 'src/types';
 
 @Component({
   selector: 'app-term-form',
