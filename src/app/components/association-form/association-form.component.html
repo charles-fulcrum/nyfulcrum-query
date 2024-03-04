@@ -1,0 +1,57 @@
+<p-dialog
+  [header]="isEditing ? 'Edit Association' : 'Add Association'"
+  [modal]="true"
+  [style]="{ width: '600px' }"
+  [(visible)]="isShowing"
+  [draggable]="false"
+  [resizable]="false"
+>
+  <form>
+    <div>
+      <label class="block text-sm pb-2" for="term">Term</label>
+      <p-dropdown
+        #termSelect
+        name="term"
+        placeholder="Select a term"
+        optionLabel="name"
+        appendTo="body"
+        [editable]="true"
+        [showClear]="true"
+        [options]="termOptions"
+        [disabled]="isEditing"
+        [(ngModel)]="term"
+        (onChange)="filterAssociatedTermOptions()"
+      ></p-dropdown>
+    </div>
+    <div class="mt-4">
+      <label class="block text-sm pb-2" for="term">Associated Terms</label>
+      <p-multiSelect
+        name="selectedAssociatedTerms"
+        optionLabel="name"
+        display="chip"
+        appendTo="body"
+        [maxSelectedLabels]="undefined"
+        [showClear]="true"
+        [options]="filteredAssociatedTermOptions"
+        [(ngModel)]="selectedAssociatedTerms"
+      >
+        <ng-template let-items pTemplate="selectedItems">
+          <p-chips
+            name="multiselect-chips"
+            field="name"
+            [(ngModel)]="selectedAssociatedTerms"
+          ></p-chips>
+        </ng-template>
+      </p-multiSelect>
+    </div>
+    <div class="text-center mt-4">
+      <p-button
+        label="Save"
+        icon="fa fa-floppy-disk"
+        severity="success"
+        [loading]="isSaving"
+        (click)="save()"
+      ></p-button>
+    </div>
+  </form>
+</p-dialog>
