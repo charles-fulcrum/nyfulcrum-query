@@ -18,8 +18,9 @@
         [(ngModel)]="name"
       />
     </div>
-    <div class="mt-2">
+    <div class="mt-4">
       <label class="block text-sm pb-2" for="term">Score</label>
+
       <input
         pInputText
         type="number"
@@ -30,6 +31,22 @@
         max="5"
         [(ngModel)]="score"
       />
+    </div>
+    <div class="mt-4">
+      <label class="block text-sm pb-2" for="selectedCategories">Categories</label>
+      <p-multiSelect
+        name="selectedCategories"
+        optionLabel="name"
+        display="chip"
+        appendTo="body"
+        [showClear]="true"
+        [options]="categoryOptions"
+        [(ngModel)]="selectedCategories"
+      >
+        <ng-template let-items pTemplate="selectedItems">
+          <p-chips name="multiselect-chips" field="name" [(ngModel)]="selectedCategories"></p-chips>
+        </ng-template>
+      </p-multiSelect>
     </div>
     <div class="text-center mt-4">
       <p-button

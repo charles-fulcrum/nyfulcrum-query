@@ -1,5 +1,11 @@
 <nav class="flex justify-between p-5">
-  <h1 class="text-2xl font-bold">Terms Management</h1>
+  <div>
+    <h1 class="text-2xl font-bold">Terms Management</h1>
+    <small class="text-neutral-500">
+      Terms are skills, technology, experiences, industries, etc. that may describe the capabilities
+      of Fulcrum
+    </small>
+  </div>
   <p-button label="Add" icon="fa fa-plus" severity="success" (click)="addTerm()"></p-button>
 </nav>
 
@@ -7,7 +13,7 @@
   <ng-template pTemplate="header">
     <tr>
       <th>Term</th>
-      <th>ID</th>
+      <th>Categories</th>
       <th>Actions</th>
     </tr>
   </ng-template>
@@ -15,7 +21,13 @@
     <tr>
       <td>{{ row.name }}</td>
       <td>
-        <small class="text-xs"> {{ row.id }} </small>
+        <div class="flex flex-wrap gap-2">
+          @for (category of row.categories; track category.id) {
+          <p-tag [value]="category.name" severity="info"></p-tag>
+          } @empty {
+          <span class="text-neutral-400">-</span>
+          }
+        </div>
       </td>
       <td class="flex gap-2 !px-0">
         <p-button
@@ -37,10 +49,10 @@
   </ng-template>
 </p-table>
 
-<app-term-form #termForm></app-term-form>
+<app-term-form [categoryOptions]="categories()" #termForm></app-term-form>
 
+@if (termToDelete) {
 <p-dialog
-  *ngIf="termToDelete"
   header="Confirm Delete Term"
   [modal]="true"
   [style]="{ width: '300px' }"
@@ -61,3 +73,4 @@
     ></p-button>
   </div>
 </p-dialog>
+}

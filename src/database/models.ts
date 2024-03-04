@@ -12,3 +12,13 @@ export const associations = pgTable('associations', {
   termId2: uuid('termId2').notNull(),
   // assocScore: real('assocScore').notNull().default(0.5),
 });
+
+export const categories = pgTable('categories', {
+  id: uuid('id').primaryKey().notNull().defaultRandom(),
+  name: varchar('name', { length: 255 }).notNull(),
+});
+
+export const termsCategories = pgTable('termsCategories', {
+  termId: uuid('termId').notNull(),
+  categoryId: uuid('categoryId').notNull(),
+});

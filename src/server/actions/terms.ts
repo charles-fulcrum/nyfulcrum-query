@@ -1,14 +1,53 @@
 import { eq } from 'drizzle-orm';
-import { TermType } from 'src/types';
+import { CategoryType, TermType, TermWithCategories } from 'src/types';
 import { db } from '../../database/connection';
-import { terms } from '../../database/models';
+import { categories, terms, termsCategories } from '../../database/models';
 
 export async function getTerms() {
-  const result = await db.select().from(terms);
-  return result.reverse();
+  const result = await db
+    .select({
+      id: terms.id,
+      name: terms.name,
+      score: terms.score,
+      category: categories,
+    })
+    .from(terms)
+    .leftJoin(termsCategories, eq(terms.id, termsCategories.termId))
+    .leftJoin(categories, eq(termsCategories.categoryId, categories.id));
+
+  /* only used to avoid adding duplicate categories */
+  const addedTermIds: TermType['id'][] = [];
+  const termsWithCategories: TermWithCategories[] = [];
+  for (const i of result) {
+    if (addedTermIds.includes(i.id)) {
+      continue;
+    }
+
+    const categories = [];
+
+    /* only used to avoid adding duplicate categories */
+    const categoryIds = [];
+    for (const j of result) {
+      const categoryId = j.category?.id;
+      if (i.id === j.id && j.category && categoryId) {
+        categoryIds.push(categoryId);
+        categories.push(j.category);
+      }
+    }
+
+    addedTermIds.push(i.id);
+    termsWithCategories.push({
+      id: i.id,
+      name: i.name,
+      score: i.score,
+      categories,
+    });
+  }
+
+  return termsWithCategories.reverse();
 }
 
-export async function createTerm(term: Omit<TermType, 'id'>) {
+export async function createTerm(term: Omit<TermType, 'id'> & { categories?: CategoryType[] }) {
   const result = await db.insert(terms).values(term).returning();
   return result;
 }
