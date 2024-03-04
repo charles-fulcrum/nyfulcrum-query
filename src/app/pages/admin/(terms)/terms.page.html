@@ -1,11 +1,6 @@
 <nav class="flex justify-between p-5">
   <h1 class="text-2xl font-bold">Terms Management</h1>
-  <p-button
-    label="Add"
-    icon="fa fa-plus"
-    severity="success"
-    (click)="addTerm()"
-  ></p-button>
+  <p-button label="Add" icon="fa fa-plus" severity="success" (click)="addTerm()"></p-button>
 </nav>
 
 <p-table [value]="terms()" [tableStyle]="{ 'min-width': '50rem' }">

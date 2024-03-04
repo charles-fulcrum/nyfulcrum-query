@@ -1,12 +1,12 @@
 /* Tailwind directives  */
-@import "tailwindcss/base" layer(tailwindcss);
-@import "tailwindcss/components" layer(tailwindcss);
-@import "tailwindcss/utilities" layer(tailwindcss);
+@import 'tailwindcss/base' layer(tailwindcss);
+@import 'tailwindcss/components' layer(tailwindcss);
+@import 'tailwindcss/utilities' layer(tailwindcss);
 
-@import "primeng/resources/primeng.css";
-@import "theme.css";
+@import 'primeng/resources/primeng.css';
+@import 'theme.css';
 
-@import "@fortawesome/fontawesome-free/css/all.css";
+@import '@fortawesome/fontawesome-free/css/all.css';
 
 :root {
   --sidebar-width: 256px;

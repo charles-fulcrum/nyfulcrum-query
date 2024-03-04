@@ -1,7 +1,7 @@
 import { defineEventHandler, getRouterParam } from 'h3';
 import { deleteTerm } from '../../actions/terms';
 
-export default defineEventHandler(async (event) => {
+export default defineEventHandler(async event => {
   const termId = getRouterParam(event, 'termId');
   if (!termId) {
     return;

@@ -14,14 +14,7 @@ import { load } from './terms.server';
 @Component({
   selector: 'app-admin-terms',
   standalone: true,
-  imports: [
-    RouterLink,
-    CommonModule,
-    TableModule,
-    ButtonModule,
-    DialogModule,
-    TermFormComponent,
-  ],
+  imports: [RouterLink, CommonModule, TableModule, ButtonModule, DialogModule, TermFormComponent],
   templateUrl: './terms.page.html',
 })
 export default class AdminTermsPageComponent {

@@ -22,4 +22,3 @@ export async function deleteTerm(termId: string) {
   const result = await db.delete(terms).where(eq(terms.id, termId)).returning();
   return result;
 }
-

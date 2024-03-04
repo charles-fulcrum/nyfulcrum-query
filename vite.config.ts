@@ -14,7 +14,7 @@ export default defineConfig(({ mode }) => ({
   },
   resolve: {
     mainFields: ['module'],
-    alias: pathAliases.map((alias) => ({
+    alias: pathAliases.map(alias => ({
       find: `@${alias}`,
       replacement: resolve(__dirname, `src/${alias}`),
     })),
