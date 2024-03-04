@@ -27,7 +27,13 @@
 
   @if (hasMatch) {
   <h1 class="text-3xl text-green-600 font-bold mt-8">Yup!</h1>
-  } @if(noMatch) {
+  } @if (noMatch) {
   <h1 class="text-3xl text-red-600 font-bold mt-8">Nope</h1>
   }
 </main>
+
+<div class="absolute w-full bottom-4 text-center">
+  <a routerLink="/data">
+    <p-button label="Learn more about us" size="small" severity="secondary"></p-button>
+  </a>
+</div>

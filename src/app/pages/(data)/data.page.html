@@ -1,1 +1,40 @@
-hello world
+<main class="w-[800px] mx-auto">
+  <nav class="flex justify-center text-center p-6">
+    <div>
+      <h1 class="text-2xl font-bold">Fulcrum Data</h1>
+      <small class="text-neutral-500">
+        Services, skills, experiences, technologies and other capabilities of Fulcrum</small
+      >
+    </div>
+  </nav>
+
+  <p-table [value]="tableData()">
+    <ng-template pTemplate="body" let-row>
+      <tr>
+        <td>{{ row.name }}</td>
+        <td>
+          <div class="flex flex-wrap gap-2">
+            @for (category of row.categories; track category.id) {
+            <p-tag [value]="category.name" severity="info"></p-tag>
+            } @empty {
+            <span class="text-neutral-400">-</span>
+            }
+          </div>
+        </td>
+        <td>
+          @if (row.score === 5) {
+          <p-tag value="We're very good at this!" severity="success" [rounded]="true"></p-tag>
+          } @else if (row.score === 4) {
+          <p-tag value="We're good at this" severity="info" [rounded]="true"></p-tag>
+          } @else if (row.score === 3) {
+          <p-tag value="We can do this" severity="warning" [rounded]="true"></p-tag>
+          } @else if (row.score === 2) {
+          <p-tag value="We're not very good at this" severity="danger" [rounded]="true"></p-tag>
+          } @else if (row.score === 1) {
+          <p-tag value="We're familiar with this" severity="danger" [rounded]="true"></p-tag>
+          }
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</main>

@@ -47,13 +47,49 @@ export async function getTerms() {
   return termsWithCategories.reverse();
 }
 
-export async function createTerm(term: Omit<TermType, 'id'> & { categories?: CategoryType[] }) {
-  const result = await db.insert(terms).values(term).returning();
-  return result;
+export async function createTerm(term: Omit<TermType, 'id'>, categoryIds?: CategoryType['id'][]) {
+  const [insertedTerm] = await db.insert(terms).values(term).returning();
+
+  let insertedTermCategories: string[] = [];
+  if (categoryIds) {
+    const termCategories = categoryIds.map(id => ({
+      termId: insertedTerm.id,
+      categoryId: id,
+    }));
+
+    const insertedTermCategoriesResult = await db
+      .insert(termsCategories)
+      .values(termCategories)
+      .returning();
+    insertedTermCategories = insertedTermCategoriesResult.map(record => record.categoryId);
+  }
+
+  const termWithCategory: TermType & { categories: string[] } = {
+    ...insertedTerm,
+    categories: insertedTermCategories,
+  };
+
+  return termWithCategory;
 }
 
-export async function updateTerm(termId: string, term: Omit<TermType, 'id'>) {
+export async function updateTerm(
+  termId: string,
+  term: Omit<TermType, 'id'>,
+  categoryIds?: CategoryType['id'][]
+) {
   const result = await db.update(terms).set(term).where(eq(terms.id, termId)).returning();
+
+  if (categoryIds) {
+    await db.delete(termsCategories).where(eq(termsCategories.termId, termId));
+
+    const termCategories = categoryIds.map(id => ({
+      termId,
+      categoryId: id,
+    }));
+
+    await db.insert(termsCategories).values(termCategories).returning();
+  }
+
   return result;
 }
 

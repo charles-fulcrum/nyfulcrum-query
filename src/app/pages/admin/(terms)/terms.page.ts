@@ -9,7 +9,7 @@ import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
 import { TableModule } from 'primeng/table';
 import { TagModule } from 'primeng/tag';
-import { TermType } from 'src/types';
+import { TermType, TermWithCategories } from 'src/types';
 import { load } from './terms.server';
 
 @Component({
@@ -43,7 +43,7 @@ export default class AdminTermsPageComponent {
     this.termFormComponent.show();
   }
 
-  editTerm(term: TermType) {
+  editTerm(term: TermWithCategories) {
     this.termFormComponent.showEdit(term);
   }
 

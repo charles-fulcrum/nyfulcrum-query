@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { TermType } from 'src/types';
+import { CategoryType, TermType } from 'src/types';
 
 type RequestBody = { [key: string]: unknown } | unknown[];
 
@@ -51,7 +51,10 @@ export class ApiService {
     return this.post('/api/terms', term);
   }
 
-  editTerm(termId: TermType['id'], editedTerm: Omit<TermType, 'id'>) {
+  editTerm(
+    termId: TermType['id'],
+    editedTerm: Omit<TermType, 'id'> & { categories?: CategoryType['id'][] }
+  ) {
     return this.patch(`/api/terms/${termId}`, editedTerm);
   }
 

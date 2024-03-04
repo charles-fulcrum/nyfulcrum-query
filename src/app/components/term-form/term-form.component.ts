@@ -6,7 +6,7 @@ import { ChipsModule } from 'primeng/chips';
 import { DialogModule } from 'primeng/dialog';
 import { InputTextModule } from 'primeng/inputtext';
 import { MultiSelectModule } from 'primeng/multiselect';
-import { CategoryType, TermType } from 'src/types';
+import { CategoryType, TermWithCategories } from 'src/types';
 
 @Component({
   selector: 'app-term-form',
@@ -45,18 +45,19 @@ export class TermFormComponent {
     this.isShowing = false;
   }
 
-  showEdit(term: TermType) {
+  showEdit(term: TermWithCategories) {
     this.show();
     this.termToEditId = term.id;
     this.name = term.name;
     this.score = term.score;
-    // this.selectedCategories = term.categories;
+    this.selectedCategories = term.categories;
   }
 
   protected async save() {
     this.isSaving = true;
 
-    const termData = { name: this.name, score: this.score };
+    const categoryIds = this.selectedCategories.map(category => category.id);
+    const termData = { name: this.name, score: this.score, categories: categoryIds };
     if (this.termToEditId) {
       await this.apiService.editTerm(this.termToEditId, termData);
     } else {
